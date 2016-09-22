@@ -1,0 +1,14 @@
+.ensime
+.ensime_cache
+
+target/
+
+.idea/
+
+.classpath
+.project
+.settings/
+*~
+\#*
+.#*
+
