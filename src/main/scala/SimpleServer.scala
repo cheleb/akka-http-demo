@@ -4,8 +4,12 @@ import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.model._
 import akka.http.scaladsl.server.Directives._
+import akka.http.scaladsl.server.StandardRoute
 import akka.stream.ActorMaterializer
+
 import scala.io.StdIn
+import scala.language.implicitConversions
+
 
 object WebServer extends App {
 
@@ -14,10 +18,14 @@ object WebServer extends App {
   // needed for the future flatMap/onComplete in the end
   implicit val executionContext = system.dispatcher
 
+  implicit def htmlUTF8(content: String): StandardRoute = complete(HttpResponse(entity = HttpEntity(ContentTypes.`text/html(UTF-8)`, content)))
+
   val route =
-    path("hello") {
+    path("") {
+      "<h1>Say hello to akka-http</h1>"
+    } ~ path("txt") {
       get {
-        complete(HttpEntity(ContentTypes.`text/html(UTF-8)`, "<h1>Say hello to akka-http</h1>"))
+        complete("Say hello to akka-http")
       }
     }
 
