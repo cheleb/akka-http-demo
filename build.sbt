@@ -6,7 +6,7 @@ version := "1.0"
 
 scalaVersion := "2.11.8"
 
-val akkaVersion = "2.4.10"
+val akkaVersion = "2.4.11"
 val circeVersion = "0.5.2"
 
 
@@ -21,6 +21,8 @@ libraryDependencies ++= Seq(
   "circe-generic",
   "circe-parser"
 ).map(d => "io.circe" %% d % circeVersion)
+
+libraryDependencies += "de.heikoseeberger" %% "akka-http-circe" % "1.10.1"
 
 libraryDependencies += "com.typesafe" % "config" % "1.2.1"
 
