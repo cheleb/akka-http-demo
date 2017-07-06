@@ -14,7 +14,7 @@ import client.SampleHttpClient
 
 import scala.io.StdIn
 import scala.language.implicitConversions
-import de.heikoseeberger.akkahttpcirce.CirceSupport._
+import de.heikoseeberger.akkahttpcirce.FailFastCirceSupport._
 import io.circe.generic.auto._
 
 

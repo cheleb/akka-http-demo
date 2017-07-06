@@ -37,6 +37,7 @@ object ActorPerRequest extends App {
 
   Http().bindAndHandle(route, "localhost", 8080)
 
+  println(s"Server online at http://localhost:8080/\nPress RETURN to stop...")
   println("ENTER to terminate")
   StdIn.readLine()
   system.terminate()

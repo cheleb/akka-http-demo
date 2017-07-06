@@ -8,18 +8,17 @@ import akka.http.scaladsl.unmarshalling.Unmarshal
 import akka.stream.{ActorMaterializer, ActorMaterializerSettings}
 
 import model.Person
-import de.heikoseeberger.akkahttpcirce.CirceSupport._
+import de.heikoseeberger.akkahttpcirce.FailFastCirceSupport._
 import io.circe.generic.auto._
 
 
-class SampleHttpClient(cb: Person=>Unit) extends Actor with ActorLogging {
+class SampleHttpClient(cb: Person => Unit) extends Actor with ActorLogging {
 
   val http = Http(context.system)
 
   import context.dispatcher
 
   final implicit val materializer: ActorMaterializer = ActorMaterializer(ActorMaterializerSettings(context.system))
-
 
 
   override def receive: Receive = {
@@ -31,8 +30,9 @@ class SampleHttpClient(cb: Person=>Unit) extends Actor with ActorLogging {
         .pipeTo(self)
 
     case p: Person =>
-     cb(p.copy(happy = true))
-     context.stop(self)
+      cb(p.copy(happy = true))
+      context.stop(self)
+      log.info("Bye bye")
     case e =>
       log.warning(s"WTF $e")
 
